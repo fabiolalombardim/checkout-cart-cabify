@@ -1,42 +1,48 @@
-import ProductsId from '../models/ProductsId';
+import ProductsId from '../models/ProductsId.model';
 import Total from '../models/Total.model';
-import ProductsPricing from '../models/ProductsPricing';
+import ProductsPricing from '../models/ProductsPricing.model';
+import Discount from './Discount';
 
-class Checkout {
-    totalResult: Total;
+class Checkout extends Discount {
     constructor(total: Total) {
-         this.totalResult = total;
+        super(total)
+        this.totalResult = total;
     }
     scan(productId) {
-        if(productId === ProductsId.cap) {
-            this.totalResult.capAmount++;
-            this.totalResult.capTotal = this.totalResult.capAmount * ProductsPricing.cap;
-        } else if( productId === ProductsId.mug) {
-            this.totalResult.mugAmount++;
-            this.totalResult.mugTotal = this.totalResult.mugAmount * ProductsPricing.mug;
-        } else {
-            this.totalResult.shirtAmount++;
-            this.totalResult.shirtTotal = this.totalResult.shirtAmount * ProductsPricing.tshirt;
+        for (let id in ProductsId) {
+            if (productId === ProductsId[id]) {
+                for (let product in this.totalResult) {
+                    if (productId === product) {
+                        this.totalResult[product]++;
+                    }
+                }
+            }
         }
-        return  this.totalResult;
+        return this.totalResult;
     }
 
     total() {
-        console.log(this.totalResult);
+        return this.totalResult.MUG * ProductsPricing.mug + this.totalResult.CAP * ProductsPricing.cap + this.totalResult.TSHIRT * ProductsPricing.tshirt -
+            this.calculateDiscount('MUG') - this.calculateDiscount('TSHIRT')
     }
 
     delete(productId) {
-        if(productId === ProductsId.cap) {
-            this.totalResult.capAmount--;
-            this.totalResult.capTotal = this.totalResult.capTotal - ProductsPricing.cap;
-        } else if( productId === ProductsId.mug) {
-            this.totalResult.mugAmount--;
-            this.totalResult.mugTotal = this.totalResult.mugTotal - ProductsPricing.mug;
-        } else {
-            this.totalResult.shirtAmount--;
-            this.totalResult.shirtTotal = this.totalResult.shirtTotal - ProductsPricing.tshirt;
+
+        for (let id in ProductsId) {
+            if (productId === ProductsId[id]) {
+                for (let product in this.totalResult) {
+                    if (productId === product) {
+                        this.totalResult[product]--;
+
+                    }
+                }
+            }
         }
-        return  this.totalResult;
+        return this.totalResult;
+    }
+
+    calculateDiscount(productId) {
+        return super.getDiscount(productId)
     }
 }
 

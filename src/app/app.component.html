@@ -1,145 +1,138 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#7350FF" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="" href="/manifest.json" />
-    <link href="assets/css/main.css" rel="stylesheet" />
-    <title>Cabify Checkout Challenge</title>
-  </head>
-  <body>
-    <div id="root">
-      <main class="App">
-        <section class="products">
-          <h1 class="main">Shopping cart</h1>
-          <ul class="products-list tableHead">
-            <li class="products-list-title row">
-              <div class="col-product">Product details</div>
-              <div class="col-quantity">Quantity</div>
-              <div class="col-price">Price</div>
-              <div class="col-total">Total</div>
-            </li>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#7350FF" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="" href="/manifest.json" />
+  <link href="assets/css/main.css" rel="stylesheet" />
+  <title>Cabify Checkout Challenge</title>
+</head>
+
+<body>
+  <div id="root">
+    <main class="App">
+      <section class="products">
+        <h1 class="main">Shopping cart</h1>
+        <ul class="products-list tableHead">
+          <li class="products-list-title row">
+            <div class="col-product">Product details</div>
+            <div class="col-quantity">Quantity</div>
+            <div class="col-price">Price</div>
+            <div class="col-total">Total</div>
+          </li>
+        </ul>
+        <ul class="products-list">
+          <li class="product row">
+            <div class="col-product">
+              <figure class="product-image">
+                <img src="assets/img/shirt.png" alt="Shirt" />
+                <div class="product-description">
+                  <h1>Shirt</h1>
+                  <p class="product-code">Product code X7R2OPX</p>
+                </div>
+              </figure>
+            </div>
+            <div class="col-quantity">
+              <button class="count" [disabled]="total.TSHIRT=== 0 ? true : false"
+                (click)="delete('TSHIRT')">-</button><input type="text" id="shirt" class="product-quantity"
+                value={{total.TSHIRT}} />
+              <button class="count" (click)="add('TSHIRT')">
+                +
+              </button>
+            </div>
+            <div class="col-price">
+              <span class="product-price">20</span><span class="product-currency currency">€</span>
+            </div>
+            <div class="col-total">
+              <span class="product-price">{{ calculateTshirtTotal()}}</span><span
+                class="product-currency currency">€</span>
+            </div>
+          </li>
+          <li class="product row">
+            <div class="col-product">
+              <figure class="product-image">
+                <img src="assets/img/mug.png" alt="Mug" />
+                <div class="product-description">
+                  <h1>Mug</h1>
+                  <p class="product-code">Product code X2G2OPZ</p>
+                </div>
+              </figure>
+            </div>
+            <div class="col-quantity">
+              <button class="count" [disabled]="total.MUG=== 0 ? true : false" (click)="delete('MUG')">-</button><input
+                type="text" id="mug" class="product-quantity" value={{total.MUG}} /><button class="count"
+                (click)="add('MUG')">
+                +
+              </button>
+            </div>
+            <div class="col-price">
+              <span class="product-price">7.5</span><span class="product-currency currency">€</span>
+            </div>
+            <div class="col-total">
+              <span class="product-price">{{ calculateMugTotal() }}</span><span
+                class="product-currency currency">€</span>
+            </div>
+          </li>
+          <li class="product row">
+            <div class="col-product">
+              <figure class="product-image">
+                <img src="assets/img/cap.png" alt="Cap" />
+                <div class="product-description">
+                  <h1>Cap</h1>
+                  <p class="product-code">Product code X3W2OPY</p>
+                </div>
+              </figure>
+            </div>
+            <div class="col-quantity">
+              <button class="count" [disabled]="total.CAP=== 0 ? true : false" (click)="delete('CAP')">-</button><input
+                type="text" id="cap" class="product-quantity" value={{total.CAP}} /><button class="count"
+                (click)="add('CAP')">
+                +
+              </button>
+            </div>
+            <div class="col-price">
+              <span class="product-price">5</span><span class="product-currency currency">€</span>
+            </div>
+            <div class="col-total">
+              <span class="product-price">{{ calculateCapTotal() }}</span><span
+                class="product-currency currency">€</span>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <aside class="summary">
+        <h1 class="main">Order Summary</h1>
+        <ul class="summary-items wrapper border">
+          <li>
+            <span class="summary-items-number">{{totalProducts() }} Items</span><span
+              class="summary-items-price">{{ totalPricing() }}<span class="currency">€</span></span>
+          </li>
+        </ul>
+        <div class="summary-discounts wrapper-half border">
+          <h2>Discounts</h2>
+          <ul>
+            <li><span>2x1 Mug offer</span><span class="discount" *ngIf="getDiscounts('MUG') !== 0">-</span><span
+                class="discountAmount">{{ getDiscounts('MUG') }}€</span></li>
+            <li><span>x3 Shirt offer</span><span class="discount" *ngIf="getDiscounts('TSHIRT') !== 0">-</span> <span
+                class="discountAmount">{{ getDiscounts('TSHIRT') }}€</span></li>
+            <!-- <li><span>Promo code</span><span>0€</span></li> -->
           </ul>
-          <ul class="products-list">
-            <li class="product row">
-              <div class="col-product">
-                <figure class="product-image">
-                  <img src="assets/img/shirt.png" alt="Shirt" />
-                  <div class="product-description">
-                    <h1>Shirt</h1>
-                    <p class="product-code">Product code X7R2OPX</p>
-                  </div>
-                </figure>
-              </div>
-              <div class="col-quantity">
-                <button class="count" [disabled]="total.shirtAmount=== 0 ? true : false" (click)="delete('TSHIRT')">-</button
-                ><input type="text" id="shirt" class="product-quantity" value={{total.shirtAmount}} />
-                <button
-                  class="count"
-                  (click)="add('TSHIRT')"
-                >
-                  +
-                </button>
-              </div>
-              <div class="col-price">
-                <span class="product-price">20</span
-                ><span class="product-currency currency">€</span>
-              </div>
-              <div class="col-total">
-                <span class="product-price">{{total.shirtTotal}}</span
-                ><span class="product-currency currency">€</span>
-              </div>
-            </li>
-            <li class="product row">
-              <div class="col-product">
-                <figure class="product-image">
-                  <img src="assets/img/mug.png" alt="Mug" />
-                  <div class="product-description">
-                    <h1>Mug</h1>
-                    <p class="product-code">Product code X2G2OPZ</p>
-                  </div>
-                </figure>
-              </div>
-              <div class="col-quantity">
-                <button class="count" [disabled]="total.mugAmount=== 0 ? true : false" (click)="delete('MUG')">-</button
-                ><input type="text" id="mug" class="product-quantity" value={{total.mugAmount}} /><button
-                  class="count"
-                  (click)="add('MUG')"
-                >
-                  +
-                </button>
-              </div>
-              <div class="col-price">
-                <span class="product-price">7.5</span
-                ><span class="product-currency currency">€</span>
-              </div>
-              <div class="col-total">
-                <span class="product-price">{{total.mugTotal}}</span
-                ><span class="product-currency currency">€</span>
-              </div>
-            </li>
-            <li class="product row">
-              <div class="col-product">
-                <figure class="product-image">
-                  <img src="assets/img/cap.png" alt="Cap" />
-                  <div class="product-description">
-                    <h1>Cap</h1>
-                    <p class="product-code">Product code X3W2OPY</p>
-                  </div>
-                </figure>
-              </div>
-              <div class="col-quantity">
-                <button class="count" [disabled]="total.capAmount=== 0 ? true : false" (click)="delete('CAP')">-</button
-                ><input type="text" id="cap" class="product-quantity" value={{total.capAmount}}  /><button
-                  class="count"
-                  (click)="add('CAP')"
-                 
-                >
-                  +
-                </button>
-              </div>
-              <div class="col-price">
-                <span class="product-price">5</span
-                ><span class="product-currency currency">€</span>
-              </div>
-              <div class="col-total">
-                <span class="product-price">{{total.capTotal}}</span
-                ><span class="product-currency currency">€</span>
-              </div>
-            </li>
-          </ul>
-        </section>
-        <aside class="summary">
-          <h1 class="main">Order Summary</h1>
-          <ul class="summary-items wrapper border">
+        </div>
+        <div class="summary-total wrapper">
+          <ul>
             <li>
-              <span class="summary-items-number">{{totalProducts() }} Items</span
-              ><span class="summary-items-price"
-                >{{ totalPricing() }}<span class="currency">€</span></span
-              >
+              <span class="summary-total-cost">Total cost</span><span
+                class="summary-total-price">{{ getFinalTotal() }}€</span>
             </li>
           </ul>
-          <div class="summary-discounts wrapper-half border">
-            <h2>Discounts</h2>
-            <ul>
-              <li><span>2x1 Mug offer</span><span>-10€</span></li>
-              <li><span>x3 Shirt offer</span><span>-3€</span></li>
-              <li><span>Promo code</span><span>0€</span></li>
-            </ul>
-          </div>
-          <div class="summary-total wrapper">
-            <ul>
-              <li>
-                <span class="summary-total-cost">Total cost</span
-                ><span class="summary-total-price">107€</span>
-              </li>
-            </ul>
-            <button type="submit">Checkout</button>
-          </div>
-        </aside>
-      </main>
-    </div>
-  </body>
+          <button type="submit">Checkout</button>
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+
 </html>
