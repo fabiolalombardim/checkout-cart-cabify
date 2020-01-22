@@ -3,9 +3,9 @@ import Total from '../models/Total.model';
 import ProductsPricing from '../models/ProductsPricing.model';
 import Discount from './Discount';
 
-class Checkout extends Discount {
+class Checkout {
+    totalResult: Total;
     constructor(total: Total) {
-        super(total)
         this.totalResult = total;
     }
     scan(productId) {
@@ -42,7 +42,8 @@ class Checkout extends Discount {
     }
 
     calculateDiscount(productId) {
-        return super.getDiscount(productId)
+        const discount = new Discount(this.totalResult)
+        return discount.getDiscount(productId)
     }
 }
 
