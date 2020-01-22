@@ -499,3 +499,7 @@ input {
 .discountAmount {
   font-weight : bold;
 }
+
+.modal.modal-wide .modal-dialog {
+  width: 90%;
+}

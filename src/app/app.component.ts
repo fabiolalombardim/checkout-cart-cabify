@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import  Checkout  from './lib/Checkout';
 import Total from './models/Total.model';
-import TotalPricing from './models/ProductsPricing.model';
+import ProductsPricing from './models/ProductsPricing.model';
+import Data from '../assets/constants/data.json';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent implements OnInit{
   total: Total = {CAP : 0, MUG : 0, TSHIRT : 0}
   checkout: Checkout;
   totalPrice: number;
+  products = Data;
   
   constructor() { 
 
@@ -26,16 +28,30 @@ export class AppComponent implements OnInit{
     this.checkout.scan(id);
   }
 
+  findProductPrice(id: string) {
+    let currentId = id.toLowerCase();
+    for (let price in ProductsPricing) {
+      if(price === currentId) {
+        return ProductsPricing[currentId];
+      }
+    }
+  }
+
+  calculateProductsTotal(id: string) {
+    let currentId = id.toLowerCase();
+      return this.total[id]  * ProductsPricing[currentId];
+  }
+
   calculateTshirtTotal() {
-    return this.total.TSHIRT * TotalPricing.tshirt;
+    return this.total.TSHIRT * ProductsPricing.tshirt;
   }
 
   calculateMugTotal() {
-    return this.total.MUG * TotalPricing.mug;
+    return this.total.MUG * ProductsPricing.mug;
   }
 
   calculateCapTotal() {
-    return this.total.CAP * TotalPricing.cap;
+    return this.total.CAP * ProductsPricing.cap;
   }
 
   delete(id: string) {
@@ -58,5 +74,8 @@ export class AppComponent implements OnInit{
     return this.totalPrice = this.checkout.total();
   }
 
+  saveProduct(product) {
+    localStorage.setItem('selectedProduct' , JSON.stringify(product));
+  }
 
 }

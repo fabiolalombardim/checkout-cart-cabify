@@ -1,0 +1,55 @@
+<link href="assets/css/main.css" rel="stylesheet" />
+<div class="modal fade" id="{{product.productId}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-lg modal-wide " role="document">
+    <div class="modal-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-8">
+            <img [src]="product.productDetailImage" />
+          </div>
+          <div class="col-4">
+            <div class="container padding">
+              <br />
+              <br />
+              <br />
+              <div class="row justify-content-end">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+
+              </div>
+              <br />
+              <br />
+              <div class="row product-title">
+                <div class="col-4">
+                  <h5 class="modal-title" id="exampleModalLabel">{{product.productName}}</h5>
+                </div>
+                <div class="col-4"></div>
+                <div class="col-4">
+                  <h5 class="modal-title" id="exampleModalLabel">{{findProductPrice()}}€</h5>
+                </div>
+              </div>
+
+              <div class="row product-description">
+                <span class="justify-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                  ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                  voluptate velit esse cillum dolore eu fugiat nulla pariatur. </span>
+              </div>
+              <br>
+              <div class="row product-code ">
+                <span>Product code {{product.productCode}}</span>
+              </div>
+              <div class="row">
+                <button type="button" class="product-add" data-dismiss="modal" aria-label="Close" (click)="onEmit()">Add
+                  to cart</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
