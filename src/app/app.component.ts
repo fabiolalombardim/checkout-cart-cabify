@@ -3,6 +3,7 @@ import Checkout from './lib/Checkout';
 import Total from './models/Total.model';
 import ProductsPricing from './models/ProductsPricing.model';
 import Data from '../assets/constants/data.json';
+import Text from '../assets/i18n/en.json';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,11 @@ import Data from '../assets/constants/data.json';
 })
 export class AppComponent implements OnInit {
 
-  total: Total = { CAP: 0, MUG: 0, TSHIRT: 0 }
+  total: Total = { CAP: 0, MUG: 0, TSHIRT: 0 };
   checkout: Checkout;
   totalPrice: number;
   products = Data;
+  texts: any = Text.home;
 
   constructor() {
 

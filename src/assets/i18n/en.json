@@ -1,0 +1,25 @@
+{
+    "home" : {
+        "shopping_cart" : "Shopping Cart",
+        "product_details" : "Product details",
+        "quantity" : "Quantity",
+        "price" : "Price",
+        "Total" : "Total",
+        "product_code" : "Product code",
+        "show_details" : "Show details",
+        "euro" : "€",
+        "order_summary" : "Order Summary",
+        "items" : "Items",
+        "discounts" : "Discounts",
+        "mug_offer" : "2x1 Mug offer",
+        "shirt_offer" : "x3 Shirt offer",
+        "total_cost" : "Total cost",
+        "checkout" : "Checkout"
+    },
+    "modal" : {
+        "product_code" : "Product code",
+        "add_to_cart" : "Add to cart",
+        "euro" : "€",
+        "default_description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit involuptate velit esse cillum dolore eu fugiat nulla pariatur."
+    }
+}

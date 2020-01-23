@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import ProductsPricing from 'src/app/models/ProductsPricing.model';
-
+import Text from '../../../assets/i18n/en.json';
 
 @Component({
   selector: 'app-modal',
@@ -9,6 +9,7 @@ import ProductsPricing from 'src/app/models/ProductsPricing.model';
 })
 export class ModalComponent{
 
+  texts: any = Text.modal;
   id: string;
   @Input() product: any;
   @Output() functionToEmit = new EventEmitter<string>();

@@ -177,7 +177,7 @@ input::placeholder {
 
 h1.main {
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(33, 34, 64, 0.16);
+  border-bottom: 0px solid rgba(33, 34, 64, 0.16);
 }
 
 .wrapper.border,
@@ -233,8 +233,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-image: url("assets/img/background.png");
-  background-color: #212240;
+  background-image: url("/assets/img/background.png");
+  background-color: #212240 !important;
   background-position: top left;
   background-size: cover;
   font-family: Avenir, "Avenir Next", "Segoe UI", sans-serif;
@@ -417,7 +417,7 @@ input {
 .summary {
   display: flex;
   flex-flow: column wrap;
-  padding: 40px 32px;
+  padding: 40px 17px;
   width: 312px;
   background-color: #f3f3f3;
   color: #212240;
@@ -502,4 +502,9 @@ input {
 
 .modal.modal-wide .modal-dialog {
   width: 90%;
+}
+.summary {
+  border-right: none !important;
+  border-left: none !important;
+  border-bottom: none !important;
 }

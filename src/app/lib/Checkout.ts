@@ -50,7 +50,9 @@ class Checkout {
     totalWithoutDiscount() {
         let total = 0;
         for (const product in this.totalResult) {
-            total += this.individualTotal(product);
+            if (product) {
+                total += this.individualTotal(product);
+            }
         }
         return total;
     }

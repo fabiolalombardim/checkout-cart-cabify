@@ -1,27 +1,13 @@
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#7350FF" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="" href="/manifest.json" />
   <link href="assets/css/main.css" rel="stylesheet" />
-  <title>Cabify Checkout Challenge</title>
-</head>
-
-<body>
-  <div id="root">
     <main class="App">
       <section class="products">
-        <h1 class="main">Shopping cart</h1>
+      <h1 class="main">{{texts.shopping_cart}}</h1>
         <ul class="products-list tableHead">
           <li class="products-list-title row">
-            <div class="col-product">Product details</div>
-            <div class="col-quantity">Quantity</div>
-            <div class="col-price">Price</div>
-            <div class="col-total">Total</div>
+            <div class="col-product">{{texts.product_details}}</div>
+            <div class="col-quantity">{{texts.quality}}</div>
+            <div class="col-price">{{texts.price}}</div>
+            <div class="col-total">{{texts.total}}</div>
           </li>
         </ul>
         <ul class="products-list">
@@ -31,9 +17,9 @@
                 <img [src]="product.productImage" alt="Shirt" />
                 <div class="product-description">
                   <h1>{{product.productName}}</h1>
-                  <p class="product-code">Product code {{product.productCode}}</p>
+                  <p class="product-code">{{texts.product_code}} {{product.productCode}}</p>
                   <button type="button" class="product-code decoration" data-toggle="modal" [attr.data-target]="'#' + product.productId">
-                    Ver detalles
+                    {{texts.show_details}}
                   </button>
                 </div>
               </figure>
@@ -47,46 +33,42 @@
               </button>
             </div>
             <div class="col-price">
-              <span class="product-price">{{findProductPrice(product.productId)}}</span><span class="product-currency currency">€</span>
+              <span class="product-price">{{findProductPrice(product.productId)}}</span><span class="product-currency currency">{{texts.euro}}</span>
             </div>
             <div class="col-total">
               <span class="product-price">{{ calculateProductsTotal(product.productId)}}</span><span
-                class="product-currency currency">€</span>
+                class="product-currency currency">{{texts.euro}}</span>
             </div>
             <app-modal [product]="product" (functionToEmit)="add(product.productId)"></app-modal>
           </li>
         </ul>
       </section>
       <aside class="summary">
-        <h1 class="main">Order Summary</h1>
-        <ul class="summary-items wrapper border">
+        <h1 class="main">{{texts.order_summary}}</h1>
+        <ul class="summary-items wrapper border summary">
           <li>
-            <span class="summary-items-number">{{totalProducts() }} Items</span><span
-              class="summary-items-price">{{ totalPricing() }}<span class="currency">€</span></span>
+            <span class="summary-items-number">{{totalProducts() }} {{texts.items}}</span><span
+              class="summary-items-price ">{{ totalPricing() }}<span class="currency">{{texts.euro}}</span></span>
           </li>
         </ul>
-        <div class="summary-discounts wrapper-half border">
-          <h2>Discounts</h2>
+        <div class="summary-discounts summary wrapper-half border">
+          <h2>{{texts.discounts}}</h2>
           <ul>
-            <li><span>2x1 Mug offer</span><span class="discount" *ngIf="getDiscounts('MUG') !== 0">-</span><span
-                class="discountAmount">{{ getDiscounts('MUG') }}€</span></li>
-            <li><span>x3 Shirt offer</span><span class="discount" *ngIf="getDiscounts('TSHIRT') !== 0">-</span> <span
-                class="discountAmount">{{ getDiscounts('TSHIRT') }}€</span></li>
+            <li><span>{{texts.mug_offer}}</span><span class="discount" *ngIf="getDiscounts('MUG') !== 0">-</span><span
+                class="discountAmount">{{ getDiscounts('MUG') }}{{texts.euro}}</span></li>
+            <li><span>{{texts.shirt_offer}}r</span><span class="discount" *ngIf="getDiscounts('TSHIRT') !== 0">-</span> <span
+                class="discountAmount">{{ getDiscounts('TSHIRT') }}{{texts.euro}}</span></li>
           </ul>
         </div>
         <div class="summary-total wrapper">
           <ul>
             <li>
-              <span class="summary-total-cost">Total cost</span><span
-                class="summary-total-price">{{ getFinalTotal() }}€</span>
+              <span class="summary-total-cost">{{texts.total_cost}}</span><span
+                class="summary-total-price">{{ getFinalTotal() }}{{texts.euro}}</span>
             </li>
           </ul>
-          <button type="submit" (click)="showTotal()">Checkout</button>
+          <button type="submit" (click)="showTotal()">{{texts.checkout}}</button>
         </div>
         
       </aside>
     </main>
-  </div>
-</body>
-
-</html>
