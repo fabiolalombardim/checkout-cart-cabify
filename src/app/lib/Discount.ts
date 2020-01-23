@@ -9,17 +9,27 @@ class Discount {
 
     getDiscount(productId) {
         if (productId === ProductsId.MUG) {
-            if (this.totalResult.MUG % 2 === 0) {
-                return ((this.totalResult.MUG * ProductsPricing.mug) / 2);
-            } else {
-                return (((this.totalResult.MUG - 1) * ProductsPricing.mug) / 2);
-            }
+            return this.twoForOneDiscount(productId);
         } else if (productId === ProductsId.TSHIRT) {
-            if (this.totalResult.TSHIRT >= 3) {
-                return ((this.totalResult.TSHIRT * ProductsPricing.tshirt) - (this.totalResult.TSHIRT * 19));
-            } else {
-                return 0;
-            }
+            return this.bulkDiscount(productId, 3, 5);
+        }
+    }
+
+    twoForOneDiscount(productId: string) {
+        const currentId = productId.toLowerCase();
+        if (this.totalResult[productId] % 2 === 0) {
+            return ((this.totalResult[productId] * ProductsPricing[currentId]) / 2);
+        } else {
+            return (((this.totalResult[productId] - 1) * ProductsPricing[currentId]) / 2);
+        }
+    }
+
+    bulkDiscount(productId: string, quantity: number, percentage: number) {
+        const currentId = productId.toLowerCase();
+        if (this.totalResult[productId] >= quantity) {
+            return ((this.totalResult[productId] * (ProductsPricing[currentId] *  percentage / 100)));
+        } else {
+            return 0;
         }
     }
 }

@@ -447,6 +447,7 @@ input {
 .summary ul li {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .summary ul li > *:nth-child(2) {

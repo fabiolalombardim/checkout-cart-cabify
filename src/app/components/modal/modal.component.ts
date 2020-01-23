@@ -7,7 +7,7 @@ import Text from '../../../assets/i18n/en.json';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent{
+export class ModalComponent {
 
   texts: any = Text.modal;
   id: string;
@@ -20,9 +20,9 @@ export class ModalComponent{
   }
 
   findProductPrice() {
-    let currentId = this.product.productId.toLowerCase();
-    for (let price in ProductsPricing) {
-      if(price === currentId) {
+    const currentId = this.product.productId.toLowerCase();
+    for (const price in ProductsPricing) {
+      if (price === currentId) {
         return ProductsPricing[currentId];
       }
     }
