@@ -1,74 +1,76 @@
-  <link href="assets/css/main.css" rel="stylesheet" />
-    <main class="App">
-      <section class="products">
-      <h1 class="main">{{texts.shopping_cart}}</h1>
-        <ul class="products-list tableHead">
-          <li class="products-list-title row">
-            <div class="col-product">{{texts.product_details}}</div>
-            <div class="col-quantity">{{texts.quantity}}</div>
-            <div class="col-price">{{texts.price}}</div>
-            <div class="col-total">{{texts.total}}</div>
-          </li>
-        </ul>
-        <ul class="products-list">
-          <li class="product row" *ngFor="let product of products">
-            <div class="col-product">
-              <figure class="product-image">
-                <img [src]="product.productImage" alt="Shirt" />
-                <div class="product-description">
-                  <h1>{{product.productName}}</h1>
-                  <p class="product-code">{{texts.product_code}} {{product.productCode}}</p>
-                  <button type="button" class="product-code decoration" data-toggle="modal" [attr.data-target]="'#' + product.productId">
-                    {{texts.show_details}}
-                  </button>
-                </div>
-              </figure>
-            </div>
-            <div class="col-quantity">
-              <button class="count" [disabled]="total[product.productId] === 0 ? true : false"
-                (click)="delete(product.productId)">-</button><input type="text" id="product.productId" class="product-quantity"
-                value={{total[product.productId]}} />
-              <button class="count" (click)="add(product.productId)">
-                +
+<link href="assets/css/main.css" rel="stylesheet" />
+<main class="App">
+  <section class="products">
+    <h1 class="main">{{texts.shopping_cart}}</h1>
+    <ul class="products-list tableHead">
+      <li class="products-list-title row">
+        <div class="col-product">{{texts.product_details}}</div>
+        <div class="col-quantity">{{texts.quantity}}</div>
+        <div class="col-price">{{texts.price}}</div>
+        <div class="col-total">{{texts.total}}</div>
+      </li>
+    </ul>
+    <ul class="products-list">
+      <li class="product row" *ngFor="let product of products">
+        <div class="col-product">
+          <figure class="product-image">
+            <img [src]="product.productImage" alt="product.productId" />
+            <div class="product-description">
+              <h1>{{product.productName}}</h1>
+              <p class="product-code">{{texts.product_code}} {{product.productCode}}</p>
+              <button type="button" class="product-code decoration" data-toggle="modal"
+                [attr.data-target]="'#' + product.productId">
+                {{texts.show_details}}
               </button>
             </div>
-            <div class="col-price">
-              <span class="product-price">{{findProductPrice(product.productId)}}</span><span class="product-currency currency">{{texts.euro}}</span>
-            </div>
-            <div class="col-total">
-              <span class="product-price">{{ calculateProductsTotal(product.productId)}}</span><span
-                class="product-currency currency">{{texts.euro}}</span>
-            </div>
-            <app-modal [product]="product" (functionToEmit)="add(product.productId)"></app-modal>
-          </li>
-        </ul>
-      </section>
-      <aside class="summary">
-        <h1 class="main">{{texts.order_summary}}</h1>
-        <ul class="summary-items wrapper border summary">
-          <li>
-            <span class="summary-items-number">{{totalProducts() }} {{texts.items}}</span><span
-              class="summary-items-price ">{{ totalPricing() }}<span class="currency">{{texts.euro}}</span></span>
-          </li>
-        </ul>
-        <div class="summary-discounts summary wrapper-half border">
-          <h2>{{texts.discounts}}</h2>
-          <ul>
-            <li><span>{{texts.mug_offer}}</span><span class="discount" *ngIf="getDiscounts('MUG') !== 0">-</span><span
-                class="discountAmount">{{ getDiscounts('MUG') }}{{texts.euro}}</span></li>
-            <li><span>{{texts.shirt_offer}}r</span><span class="discount" *ngIf="getDiscounts('TSHIRT') !== 0">-</span> <span
-                class="discountAmount">{{ getDiscounts('TSHIRT') }}{{texts.euro}}</span></li>
-          </ul>
+          </figure>
         </div>
-        <div class="summary-total wrapper">
-          <ul>
-            <li>
-              <span class="summary-total-cost">{{texts.total_cost}}</span><span
-                class="summary-total-price">{{ getFinalTotal() }}{{texts.euro}}</span>
-            </li>
-          </ul>
-          <button type="submit" (click)="showTotal()">{{texts.checkout}}</button>
+        <div class="col-quantity">
+          <button class="count" [disabled]="total[product.productId] === 0 ? true : false"
+            (click)="removeProduct(product.productId)" id="delete">-</button><input type="text" id="product.productId"
+            class="product-quantity" value={{total[product.productId]}} />
+          <button class="count" (click)="addProduct(product.productId)" id="add">
+            +
+          </button>
         </div>
-        
-      </aside>
-    </main>
+        <div class="col-price">
+          <span class="product-price">{{findProductPrice(product.productId)}}</span><span
+            class="product-currency currency">{{texts.euro}}</span>
+        </div>
+        <div class="col-total">
+          <span class="product-price">{{ calculateProductsTotal(product.productId)}}</span><span
+            class="product-currency currency">{{texts.euro}}</span>
+        </div>
+        <app-modal [product]="product" (functionToEmit)="addProduct(product.productId)"></app-modal>
+      </li>
+    </ul>
+  </section>
+  <aside class="summary">
+    <h1 class="main">{{texts.order_summary}}</h1>
+    <ul class="summary-items wrapper border summary">
+      <li>
+        <span class="summary-items-number">{{totalProducts() }} {{texts.items}}</span><span
+          class="summary-items-price ">{{ totalPricing() }}<span class="currency">{{texts.euro}}</span></span>
+      </li>
+    </ul>
+    <div class="summary-discounts summary wrapper-half border">
+      <h2>{{texts.discounts}}</h2>
+      <ul>
+        <li><span>{{texts.mug_offer}}</span><span class="discount" *ngIf="getDiscounts('MUG') !== 0">-</span><span
+            class="discountAmount">{{ getDiscounts('MUG') }}{{texts.euro}}</span></li>
+        <li><span>{{texts.shirt_offer}}r</span><span class="discount" *ngIf="getDiscounts('TSHIRT') !== 0">-</span>
+          <span class="discountAmount">{{ getDiscounts('TSHIRT') }}{{texts.euro}}</span></li>
+      </ul>
+    </div>
+    <div class="summary-total wrapper">
+      <ul>
+        <li>
+          <span class="summary-total-cost">{{texts.total_cost}}</span><span
+            class="summary-total-price">{{ getFinalTotal() }}{{texts.euro}}</span>
+        </li>
+      </ul>
+      <button type="submit" (click)="showTotal()">{{texts.checkout}}</button>
+    </div>
+
+  </aside>
+</main>

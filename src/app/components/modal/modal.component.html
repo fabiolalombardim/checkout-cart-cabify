@@ -6,7 +6,7 @@
       <div class="container">
         <div class="row">
           <div class="col-8">
-            <img [src]="product.productDetailImage" />
+            <img [src]="product.productDetailImage" alt="product.productId" />
           </div>
           <div class="col-4 sectionAlign">
             <div class="container">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-4"></div>
                 <div class="col-4">
-                <h5 class="modal-title" id="exampleModalLabel">{{findProductPrice()}}{{texts.euro}}</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">{{findProductPrice()}}{{texts.euro}}</h5>
                 </div>
               </div>
 
@@ -35,7 +35,8 @@
                 <span>{{texts.product_code}} {{product.productCode}}</span>
               </div>
               <div class="row">
-              <button type="button" class="product-add" data-dismiss="modal" aria-label="Close" (click)="onEmit()">{{texts.add_to_cart}}</button>
+                <button type="button" class="product-add" data-dismiss="modal" aria-label="Close"
+                  (click)="onEmit()">{{texts.add_to_cart}}</button>
               </div>
             </div>
           </div>
