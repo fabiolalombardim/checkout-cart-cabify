@@ -1,6 +1,15 @@
 h5 {
     font-weight: 900;
 }
+main {
+    max-height: inherit;
+}
+img {
+    object-fit: none;
+    width: 748px;
+    height: unset;
+    height: 648px;
+}
 .modal-content {
     height: 100vh;
     width: 100vw;
@@ -13,15 +22,6 @@ h5 {
 }
 .modal {
     overflow-y: hidden !important;
-}
-main {
-    max-height: inherit;
-}
-img {
-    object-fit: none;
-    width: 748px;
-    height: unset;
-    height: 648px;
 }
 .container {
     height: 648px;
@@ -46,7 +46,6 @@ img {
 
 }
 .product-description {
-    // position: absolute !important;
     margin-top: 25px;
     padding-top: 15px;
     border-top: 1px solid lightgray;

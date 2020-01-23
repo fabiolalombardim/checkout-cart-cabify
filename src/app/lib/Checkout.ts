@@ -8,7 +8,7 @@ class Checkout {
     constructor(total: Total) {
         this.totalResult = total;
     }
-    scan(productId) {
+    scan(productId: string) {
         for (const id in ProductsId) {
             if (productId === ProductsId[id]) {
                 for (const product in this.totalResult) {
@@ -23,11 +23,11 @@ class Checkout {
 
     total() {
         return this.totalResult.MUG * ProductsPricing.mug + this.totalResult.CAP *
-                ProductsPricing.cap + this.totalResult.TSHIRT * ProductsPricing.tshirt -
-                this.calculateDiscount(ProductsId.MUG) - this.calculateDiscount(ProductsId.TSHIRT);
+            ProductsPricing.cap + this.totalResult.TSHIRT * ProductsPricing.tshirt -
+            this.calculateDiscount(ProductsId.MUG) - this.calculateDiscount(ProductsId.TSHIRT);
     }
 
-    delete(productId) {
+    delete(productId: string) {
 
         for (const id in ProductsId) {
             if (productId === ProductsId[id]) {
@@ -42,9 +42,23 @@ class Checkout {
         return this.totalResult;
     }
 
-    calculateDiscount(productId) {
+    calculateDiscount(productId: string) {
         const discount = new Discount(this.totalResult);
         return discount.getDiscount(productId);
+    }
+
+    totalWithoutDiscount() {
+        let total = 0;
+        for (const product in this.totalResult) {
+            total += this.individualTotal(product);
+        }
+        return total;
+    }
+
+    individualTotal(productId: string) {
+        const currentId = productId.toLowerCase();
+        const individualTotal = this.totalResult[productId] * ProductsPricing[currentId];
+        return individualTotal;
     }
 }
 

@@ -16,7 +16,7 @@ class Discount {
             }
         } else if (productId === ProductsId.TSHIRT) {
             if (this.totalResult.TSHIRT >= 3) {
-                return ((this.totalResult.TSHIRT * ProductsPricing.tshirt) -  (this.totalResult.TSHIRT * 19));
+                return ((this.totalResult.TSHIRT * ProductsPricing.tshirt) - (this.totalResult.TSHIRT * 19));
             } else {
                 return 0;
             }

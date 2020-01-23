@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import  Checkout  from './lib/Checkout';
+import Checkout from './lib/Checkout';
 import Total from './models/Total.model';
 import ProductsPricing from './models/ProductsPricing.model';
 import Data from '../assets/constants/data.json';
@@ -9,49 +9,37 @@ import Data from '../assets/constants/data.json';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
-  total: Total = {CAP : 0, MUG : 0, TSHIRT : 0}
+  total: Total = { CAP: 0, MUG: 0, TSHIRT: 0 }
   checkout: Checkout;
   totalPrice: number;
   products = Data;
-  
-  constructor() { 
+
+  constructor() {
 
   }
 
   ngOnInit() {
-      this.checkout = new Checkout(this.total);
+    this.checkout = new Checkout(this.total);
   }
 
-  add(id:string) {
+  add(id: string) {
     this.checkout.scan(id);
   }
 
   findProductPrice(id: string) {
-    let currentId = id.toLowerCase();
-    for (let price in ProductsPricing) {
-      if(price === currentId) {
+    const currentId = id.toLowerCase();
+    for (const price in ProductsPricing) {
+      if (price === currentId) {
         return ProductsPricing[currentId];
       }
     }
   }
 
   calculateProductsTotal(id: string) {
-    let currentId = id.toLowerCase();
-      return this.total[id]  * ProductsPricing[currentId];
-  }
-
-  calculateTshirtTotal() {
-    return this.total.TSHIRT * ProductsPricing.tshirt;
-  }
-
-  calculateMugTotal() {
-    return this.total.MUG * ProductsPricing.mug;
-  }
-
-  calculateCapTotal() {
-    return this.total.CAP * ProductsPricing.cap;
+    const individuaTotal = this.checkout.individualTotal(id);
+    return individuaTotal;
   }
 
   delete(id: string) {
@@ -66,16 +54,16 @@ export class AppComponent implements OnInit{
     return this.total.CAP + this.total.MUG + this.total.TSHIRT;
   }
 
-   totalPricing() {
-    return this.calculateCapTotal() + this.calculateTshirtTotal() + this.calculateMugTotal();
+  totalPricing() {
+   return this.checkout.totalWithoutDiscount();
   }
 
   getFinalTotal() {
     return this.totalPrice = this.checkout.total();
   }
 
-  saveProduct(product) {
-    localStorage.setItem('selectedProduct' , JSON.stringify(product));
+  showTotal() {
+    alert('Total amount to be paid ' + this.getFinalTotal() + '€');
   }
 
 }

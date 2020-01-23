@@ -32,7 +32,7 @@
                 <div class="product-description">
                   <h1>{{product.productName}}</h1>
                   <p class="product-code">Product code {{product.productCode}}</p>
-                  <button type="button" class="product-code decoration" data-toggle="modal" [attr.data-target]="'#' + product.productId" (click)="saveProduct(product)">
+                  <button type="button" class="product-code decoration" data-toggle="modal" [attr.data-target]="'#' + product.productId">
                     Ver detalles
                   </button>
                 </div>
@@ -81,7 +81,7 @@
                 class="summary-total-price">{{ getFinalTotal() }}€</span>
             </li>
           </ul>
-          <button type="submit">Checkout</button>
+          <button type="submit" (click)="showTotal()">Checkout</button>
         </div>
         
       </aside>
