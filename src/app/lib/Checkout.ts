@@ -9,9 +9,9 @@ class Checkout {
         this.totalResult = total;
     }
     scan(productId) {
-        for (let id in ProductsId) {
+        for (const id in ProductsId) {
             if (productId === ProductsId[id]) {
-                for (let product in this.totalResult) {
+                for (const product in this.totalResult) {
                     if (productId === product) {
                         this.totalResult[product]++;
                     }
@@ -22,15 +22,16 @@ class Checkout {
     }
 
     total() {
-        return this.totalResult.MUG * ProductsPricing.mug + this.totalResult.CAP * ProductsPricing.cap + this.totalResult.TSHIRT * ProductsPricing.tshirt -
-            this.calculateDiscount('MUG') - this.calculateDiscount('TSHIRT')
+        return this.totalResult.MUG * ProductsPricing.mug + this.totalResult.CAP *
+                ProductsPricing.cap + this.totalResult.TSHIRT * ProductsPricing.tshirt -
+                this.calculateDiscount(ProductsId.MUG) - this.calculateDiscount(ProductsId.TSHIRT);
     }
 
     delete(productId) {
 
-        for (let id in ProductsId) {
+        for (const id in ProductsId) {
             if (productId === ProductsId[id]) {
-                for (let product in this.totalResult) {
+                for (const product in this.totalResult) {
                     if (productId === product) {
                         this.totalResult[product]--;
 
@@ -42,8 +43,8 @@ class Checkout {
     }
 
     calculateDiscount(productId) {
-        const discount = new Discount(this.totalResult)
-        return discount.getDiscount(productId)
+        const discount = new Discount(this.totalResult);
+        return discount.getDiscount(productId);
     }
 }
 

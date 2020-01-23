@@ -2,15 +2,20 @@ h5 {
     font-weight: 900;
 }
 .modal-content {
-    height: 74vh;
-    width: 68vw;
+    height: 100vh;
+    width: 100vw;
 } 
 .modal-dialog {
     margin: 0 0 0 0;
 }
+.modal-open {
+    overflow-y: hidden !important;
+}
+.modal {
+    overflow-y: hidden !important;
+}
 main {
     max-height: inherit;
-    overflow-y: hidden;
 }
 img {
     object-fit: none;
@@ -79,4 +84,7 @@ img {
     cursor: pointer;
     margin: auto;
     margin-right: 34px;
+}
+.sectionAlign {
+    padding-right: 50px;
 }
